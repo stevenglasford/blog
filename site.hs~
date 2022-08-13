@@ -10,9 +10,9 @@ config = defaultConfiguration
 
 --------------------------------------------------------------------------------
 main :: IO ()
-main = hakyllWith config $ do
+main = hakyll $ do
     match "images/*" $ do
-      route   idRoute
+        route   idRoute
       compile copyFileCompiler
 
     match "css/*" $ do
