@@ -3,6 +3,10 @@
 import           Data.Monoid (mappend)
 import           Hakyll
 
+
+import Text.Pandoc.Highlighting (Style, haddock, styleToCss)
+import Text.Pandoc.Options      (ReaderOptions (..), WriterOptions (..))
+
 config :: Configuration
 config = defaultConfiguration
   { destinationDirectory = "docs"
@@ -10,9 +14,9 @@ config = defaultConfiguration
 
 --------------------------------------------------------------------------------
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith config $ do
     match "images/*" $ do
-        route   idRoute
+      route   idRoute
       compile copyFileCompiler
 
     match "css/*" $ do

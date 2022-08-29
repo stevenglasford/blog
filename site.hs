@@ -3,6 +3,21 @@
 import           Data.Monoid (mappend)
 import           Hakyll
 
+
+import Text.Pandoc.Highlighting (Style, haddock, styleToCss)
+import Text.Pandoc.Options      (ReaderOptions (..), WriterOptions (..))
+
+pandocCodeStyle :: Style
+pandocCodeStyle = haddock
+
+pandocCompiler' :: Compiler (Item String)
+pandocCompiler' =
+  pandocCompilerWith
+    defaultHakyllReaderOptions
+    defaultHakyllWriterOptions
+      { writerHighlightStyle   = Just pandocCodeStyle
+      }
+
 config :: Configuration
 config = defaultConfiguration
   { destinationDirectory = "docs"
